@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Premium Bio Page</title>
+
+<!-- ================= META PIXEL CODE ================= -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+
+fbq('init', '1197883339151483');
+fbq('track', 'PageView');
+</script>
+<!-- =================================================== -->
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Segoe UI',sans-serif;
+}
+
+body{
+  height:100vh;
+  overflow:hidden;
+  background:#000;
+}
+
+.bg{
+  position:fixed;
+  inset:0;
+  background:url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee");
+  background-size:cover;
+  background-position:center;
+  filter:brightness(0.45);
+  z-index:0;
+}
+
+canvas{
+  position:fixed;
+  inset:0;
+  z-index:1;
+}
+
+.wrap{
+  position:relative;
+  z-index:2;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.card{
+  width:90%;
+  max-width:360px;
+  background:rgba(0,0,0,0.68);
+  backdrop-filter:blur(14px);
+  border-radius:22px;
+  padding:28px 22px;
+  text-align:center;
+  box-shadow:0 0 40px rgba(255,215,0,0.55);
+  border:1px solid rgba(255,215,0,0.45);
+}
+
+.profile{
+  width:115px;
+  height:115px;
+  border-radius:50%;
+  border:3px solid gold;
+  object-fit:cover;
+  margin-bottom:14px;
+}
+
+h1{
+  color:gold;
+  font-size:24px;
+  min-height:32px;
+  letter-spacing:1px;
+}
+
+.bio{
+  color:#ddd;
+  font-size:14px;
+  margin:12px 0 18px;
+  line-height:1.4;
+}
+
+.timer{
+  color:#ffcc00;
+  font-size:16px;
+  font-weight:800;
+  margin:16px 0;
+}
+
+.btn{
+  position:relative;
+  display:inline-block;
+  padding:13px 26px;
+  border-radius:35px;
+  background:linear-gradient(45deg,#ffcc00,#ff8800);
+  color:#000;
+  font-weight:800;
+  text-decoration:none;
+  font-size:15px;
+  margin:10px 0;
+  overflow:hidden;
+  animation:floatBtn 2.6s ease-in-out infinite, glowPulse 2s ease-in-out infinite;
+}
+
+@keyframes floatBtn{
+  0%{transform:translateY(0)}
+  50%{transform:translateY(-9px)}
+  100%{transform:translateY(0)}
+}
+
+@keyframes glowPulse{
+  0%{box-shadow:0 0 12px gold}
+  50%{box-shadow:0 0 30px gold}
+  100%{box-shadow:0 0 12px gold}
+}
+
+.btn::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:-120%;
+  width:120%;
+  height:100%;
+  background:linear-gradient(120deg,transparent,rgba(255,255,255,.6),transparent);
+  animation:lightMove 2.2s linear infinite;
+}
+
+@keyframes lightMove{
+  from{left:-120%}
+  to{left:120%}
+}
+
+.footer{
+  font-size:12px;
+  color:#aaa;
+  margin-top:12px;
+}
+</style>
+</head>
+
+<body>
+
+<noscript>
+<img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1197883339151483&ev=PageView&noscript=1"/>
+</noscript>
+
+<div class="bg"></div>
+<canvas id="particles"></canvas>
+
+<div class="wrap">
+  <div class="card">
+
+    <img class="profile" src="https://i.ibb.co/4gJYd1dj/x.jpg">
+
+    <h1 id="typing"></h1>
+
+    <div class="bio">
+      Official Channel For Daily Number Insight 🔥<br>
+      Trusted Tips by Pro Team – Join Now 👇
+    </div>
+
+    <a class="btn" href="https://t.me/+4ZqCKddWLt1kZGM1" target="_blank" onclick="playClick()">🚀 JOIN FOR FREE</a>
+
+    <div class="timer" id="timer">Offer ends in 00:15</div>
+
+    <a class="btn" href="https://t.me/+4ZqCKddWLt1kZGM1" target="_blank" onclick="playClick()">🚀 JOIN TELEGRAM NOW</a>
+
+    <div class="footer">© ADS MANAGED BY @RECOVERYYOURALL</div>
+
+  </div>
+</div>
+
+<audio id="clickSound">
+  <source src="https://www.soundjay.com/buttons/sounds/button-16.mp3">
+</audio>
+
+<script>
+function playClick(){
+  document.getElementById("clickSound").currentTime=0;
+  document.getElementById("clickSound").play();
+  fbq('track','Lead');
+}
+
+/* Typing Effect */
+const text="𝐑𝐀𝐉𝐀 𝐆𝐀𝐌𝐄 𝐒𝐔𝐑𝐄𝐒𝐇𝐎𝐓";
+let i=0;
+const el=document.getElementById("typing");
+(function type(){
+  if(i<text.length){
+    el.innerHTML+=text.charAt(i++);
+    setTimeout(type,90);
+  }
+})();
+
+/* ===== 15 SECOND COUNTDOWN ===== */
+let time = 15;
+const timer = document.getElementById("timer");
+const redirectURL = "https://t.me/+4ZqCKddWLt1kZGM1";
+
+const cd = setInterval(()=>{
+  const s = time;
+  timer.innerHTML = `Offer ends in 00:${String(s).padStart(2,'0')}`;
+
+  if(time <= 0){
+    clearInterval(cd);
+    fbq('track','CompleteRegistration');
+    timer.innerHTML = "⏳ Redirecting...";
+    setTimeout(()=>location.href = redirectURL,1200);
+  }
+  time--;
+},1000);
+</script>
+
+</body>
+</html>
