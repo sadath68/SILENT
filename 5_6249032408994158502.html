@@ -1,0 +1,264 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>CRACK BY SILENT X KILLER 🔞</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --accent: #32ff7e; 
+            --glass: rgba(15, 15, 25, 0.95);
+            --tele: #0088cc;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        
+        body { 
+            background: #000; 
+            font-family: 'Montserrat', sans-serif;
+            overflow: hidden; height: 100vh; width: 100vw;
+        }
+
+        #game-frame {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; z-index: 1;
+        }
+
+        /* Compact & Optimized Panel */
+        #squad-panel {
+            position: absolute;
+            top: 15%; left: 10px;
+            width: 180px;
+            z-index: 9999;
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border-radius: 25px; 
+            border: 1px solid rgba(50, 255, 126, 0.3);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+            padding: 12px;
+            text-align: center;
+            color: #fff;
+            user-select: none;
+        }
+
+        .drag-handle {
+            width: 40px; height: 5px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 10px;
+            margin: 0 auto 10px auto;
+            cursor: move;
+            touch-action: none;
+        }
+
+        .header h1 { font-size: 12px; font-weight: 900; color: var(--accent); letter-spacing: 1px; text-transform: uppercase; }
+        .header p { font-size: 7px; color: #888; margin-bottom: 10px; }
+
+        .pass-input {
+            width: 100%; background: rgba(255,255,255,0.08);
+            border: 1px solid transparent; border-radius: 15px;
+            padding: 8px; color: #fff; font-size: 11px;
+            text-align: center; outline: none; margin-bottom: 10px;
+            border: 1px solid rgba(50, 255, 126, 0.1);
+        }
+        .pass-input:focus { border-color: var(--accent); }
+
+        .btn {
+            width: 100%; padding: 10px;
+            border: none; border-radius: 15px;
+            font-weight: 700; font-size: 10px; cursor: pointer;
+            text-transform: uppercase; margin-bottom: 6px;
+            display: block; transition: 0.2s;
+        }
+        .btn-auth { background: var(--accent); color: #000; }
+        .btn-tele { background: var(--tele); color: #fff; text-decoration: none; font-size: 9px; }
+        .btn:active { transform: scale(0.95); }
+
+        #prediction-view { display: none; }
+        
+        .res-circle {
+            width: 75px; height: 75px;
+            margin: 10px auto;
+            border-radius: 50%;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            border: 3px solid var(--accent);
+            box-shadow: 0 0 15px rgba(50, 255, 126, 0.2);
+        }
+
+        .res-text { font-size: 16px; font-weight: 900; }
+        .res-sub { font-size: 8px; color: var(--accent); font-weight: bold; letter-spacing: 1px; }
+
+        .info-box {
+            background: rgba(255,255,255,0.05);
+            border-radius: 15px; padding: 8px; margin-top: 10px;
+        }
+        .period-txt { font-size: 9px; color: #aaa; }
+        .period-txt span { color: #fff; font-weight: bold; }
+        
+        .timer-txt { font-size: 10px; font-weight: bold; color: var(--accent); margin-top: 5px; }
+
+        .err { color: #ff4757; font-size: 9px; margin-bottom: 8px; display: none; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <!-- Background Game -->
+    <iframe id="game-frame" src="https://www.6clubc.com/#/register?invitationCode=628784127713"></iframe>
+
+    <!-- Overlay Panel -->
+    <div id="squad-panel">
+        <div class="drag-handle" id="dragBtn"></div>
+
+        <div class="header">
+            <h1>FAHIM SQUAD</h1>
+            <p>SILENT X KILLER 🔞 CRACKED</p>
+        </div>
+
+        <!-- Login Section -->
+        <div id="login-view">
+            <input type="text" id="passInput" class="pass-input" placeholder="ENTER ACCESS KEY">
+            <div id="errTxt" class="err">INVALID KEY!</div>
+            <button class="btn btn-auth" onclick="login()">AUTHORIZE</button>
+            <a href="https://t.me/SILENTXKILLER66" class="btn btn-tele">JOIN TELEGRAM</a>
+        </div>
+
+        <!-- Prediction Section -->
+        <div id="prediction-view">
+            <div class="period-txt">ID: <span id="periodId">LOADING...</span></div>
+            
+            <div class="res-circle">
+                <div class="res-sub">RESULT</div>
+                <div class="res-text" id="resTxt">WAIT</div>
+            </div>
+
+            <div class="info-box">
+                <div class="timer-txt">NEXT IN: <span id="timerClock">59</span>s</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const KEY = "SILENT";
+        const API_URL = 'https://api.bdg88zf.com/api/webapi/GetGameIssue';
+        const API_BODY = {
+            typeId: 1, language: 0, random: "e7fe6c090da2495ab8290dac551ef1ed",
+            signature: "1F390E2B2D8A55D693E57FD905AE73A7", timestamp: 1723726679
+        };
+
+        // Persistent Login Check
+        window.onload = function() {
+            if (localStorage.getItem('squad_access_granted') === 'true') {
+                showMain();
+            }
+        };
+
+        function login() {
+            const val = document.getElementById('passInput').value.trim();
+            if (val === KEY) {
+                localStorage.setItem('squad_access_granted', 'true');
+                showMain();
+            } else {
+                const e = document.getElementById('errTxt');
+                e.style.display = 'block';
+                setTimeout(() => e.style.display = 'none', 2500);
+            }
+        }
+
+        function showMain() {
+            document.getElementById('login-view').style.display = 'none';
+            document.getElementById('prediction-view').style.display = 'block';
+            startEngine();
+        }
+
+        function startEngine() {
+            fetchData();
+            setInterval(() => {
+                const now = new Date();
+                const sec = now.getSeconds();
+                
+                // ৫৯ থেকে ১ পর্যন্ত টাইমার লুপ (ফিক্সড)
+                let countdown = 59 - sec;
+                if (countdown < 1) countdown = 59;
+                
+                document.getElementById('timerClock').innerText = (countdown < 10 ? "0" + countdown : countdown);
+                
+                // যখন সিস্টেম সেকেন্ড ১ বা ৬০ হয় তখন নতুন ডাটা ফেচ হবে
+                if (sec === 0 || sec === 1) {
+                    fetchData();
+                }
+            }, 1000);
+        }
+
+        async function fetchData() {
+            try {
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(API_BODY)
+                });
+                const d = await response.json();
+                
+                if (d && d.data && d.data.issueNumber) {
+                    const issue = d.data.issueNumber;
+                    document.getElementById('periodId').innerText = issue.slice(-7);
+                    
+                    // Prediction Algorithm
+                    const lastNum = parseInt(issue.slice(-1));
+                    const isBig = lastNum >= 5;
+                    const res = document.getElementById('resTxt');
+                    
+                    res.innerText = isBig ? "BIG" : "SMALL";
+                    res.style.color = isBig ? "#32ff7e" : "#fff";
+                } else {
+                    fallback();
+                }
+            } catch (error) {
+                fallback();
+            }
+        }
+
+        function fallback() {
+            // API কাজ না করলে লোকাল টাইম দিয়ে আইডি জেনারেট
+            const now = new Date();
+            const fallId = now.getHours() + "" + now.getMinutes() + "" + now.getSeconds();
+            document.getElementById('periodId').innerText = "ST-" + fallId;
+        }
+
+        // --- Draggable System (Fixed for Mobile & PC) ---
+        const pnl = document.getElementById("squad-panel");
+        const hndl = document.getElementById("dragBtn");
+        let dragging = false, xOff, yOff;
+
+        const start = (e) => {
+            dragging = true;
+            const clientX = e.type === "touchstart" ? e.touches[0].clientX : e.clientX;
+            const clientY = e.type === "touchstart" ? e.touches[0].clientY : e.clientY;
+            xOff = clientX - pnl.offsetLeft;
+            yOff = clientY - pnl.offsetTop;
+        };
+
+        const move = (e) => {
+            if (!dragging) return;
+            e.preventDefault();
+            const clientX = e.type === "touchmove" ? e.touches[0].clientX : e.clientX;
+            const clientY = e.type === "touchmove" ? e.touches[0].clientY : e.clientY;
+            
+            pnl.style.left = (clientX - xOff) + "px";
+            pnl.style.top = (clientY - yOff) + "px";
+        };
+
+        const stop = () => { dragging = false; };
+
+        hndl.addEventListener("mousedown", start);
+        hndl.addEventListener("touchstart", start, { passive: false });
+        document.addEventListener("mousemove", move);
+        document.addEventListener("touchmove", move, { passive: false });
+        document.addEventListener("mouseup", stop);
+        document.addEventListener("touchend", stop);
+
+    </script>
+</body>
+</html>
